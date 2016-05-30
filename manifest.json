@@ -1,0 +1,19 @@
+{
+  "name":"OwnYourData Survey App",
+  "identifier":"eu.ownyourdata.survey",
+  "type":"hosted",
+  "description":"perform and evaluate surveys",
+  "permissions":["eu.ownyourdata.survey:read",
+                 "eu.ownyourdata.survey:write",
+                 "eu.ownyourdata.survey:update",
+                 "eu.ownyourdata.survey:delete",
+                 "eu.ownyourdata.survey.ngo:read",
+                 "eu.ownyourdata.survey.ngo:write",
+                 "eu.ownyourdata.survey.ngo:update",
+                 "eu.ownyourdata.survey.ngo:delete",
+                 "eu.ownyourdata.survey.ngo.config:read",
+                 "eu.ownyourdata.survey.ngo.config:write",
+                 "eu.ownyourdata.survey.ngo.config:update",
+                 "eu.ownyourdata.survey.ngo.config:delete"],
+  "requires": ["eu.ownyourdata.shinyhost"]
+}
