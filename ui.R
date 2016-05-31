@@ -17,7 +17,7 @@ shinyUI(navbarPage(HTML(paste0('<a href=',shQuote(saved_url), '>', '<img height=
                  tabAppStatusUI()),
         tabPanel('Datenquellen',
                  tabAppSourceUI()),
-        tabPanel('gespeicherte Daten',
+        tabPanel('Gespeicherte Daten',
                  tabAppStoreUI()),
         navbarMenu('Infos',
            tabPanel(HTML(paste0("Version</a></li><li><a href=\"https://github.com/OwnYourData/app-",
