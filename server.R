@@ -294,8 +294,11 @@ shinyServer(function(input, output, session) {
                 theta <- input$surveyResult
                 err2 <- (crowd - theta)^2
                 
-                paste('<strong>Crowd Fehler:</strong>',
-                      format(round(err2, 2), nsmall = 2))
+                paste0('<strong>Crowd Fehler:</strong> ',
+                       format(round(err2, 2), nsmall = 2),
+                       ' (',
+                       format(round(sqrt(err2), 2), nsmall = 2),
+                       ')')
         })
         
         output$avgError <- renderText({
@@ -306,8 +309,11 @@ shinyServer(function(input, output, session) {
                 theta <- input$surveyResult
                 avg2 <- sum((as.numeric(data$value) - theta)^2)/n
 
-                paste('<strong>durchschnittlicher Fehler:</strong>',
-                      format(round(avg2, 2), nsmall = 2))
+                paste0('<strong>durchschnittlicher Fehler:</strong> ',
+                       format(round(avg2, 2), nsmall = 2),
+                       ' (',
+                       format(round(sqrt(avg2), 2), nsmall = 2),
+                       ')')
         })
         
         output$diversity <- renderText({
@@ -318,8 +324,11 @@ shinyServer(function(input, output, session) {
                 crowd <- mean(as.numeric(data$value), na.rm = T)
                 div2 <- sum((as.numeric(data$value) - crowd)^2)/n
                 
-                paste('<strong>Streuung:</strong>',
-                      format(round(div2, 2), nsmall = 2))
+                paste0('<strong>Streuung:</strong> ',
+                       format(round(div2, 2), nsmall = 2),
+                       ' (',
+                       format(round(sqrt(div2), 2), nsmall = 2),
+                       ')')
         })
         
         output$current_token <- renderText({
