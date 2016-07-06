@@ -25,6 +25,10 @@ shinyUI(navbarPage(HTML(paste0('<a href=',shQuote(saved_url), '>', '<img height=
                                 "/blob/master/README.md\">Anleitung")),
                     sidebarLayout(
                             sidebarPanel(
+                                    tags$script('setInterval(avoidIdle, 5000);
+                                                function avoidIdle() 
+                                                { Shiny.onInputChange("myData", 0) }'
+                                    ),
                                     p('Support: ', 
                                       a(href='mailto:support@ownyourdata.eu', 
                                         'support@ownyourdata.eu')),

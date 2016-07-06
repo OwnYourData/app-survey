@@ -284,6 +284,15 @@ shinyServer(function(input, output, session) {
                 paste('<strong>Crowd Prediction:</strong>',
                       format(round(crowd, 2), nsmall = 2))
         })
+
+        output$crowdMedian <- renderText({
+                input$dataSheet
+                input$refreshBtn
+                data <- currData()
+                cMedian <- median(as.numeric(data$value), na.rm = T)
+                
+                paste('<strong>Crowd Median:</strong>',cMedian)
+        })
         
         output$crowdError <- renderText({
                 input$dataSheet
