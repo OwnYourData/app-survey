@@ -1,17 +1,42 @@
-source("appStatusDateSelect.R")
-source("appStatusSurveySelect.R")
-source("appStatusItems.R")
+# layout for section "Status"
+# last update: 2016-10-10
 
-tabAppStatusUI <- function(){
+source('appStatusDateSelect.R')
+source('appStatusPrediction.R')
+source('appStatusQuality.R')
+
+appStatus <- function(){
         fluidRow(
-                column(1),
-                column(10,
-                       h3('Anzeige'),
-                       #tabAppStatusDateSelectUI(),
-                       tabAppStatusSurveySelectUI(),
-                       bsAlert('noData'),
-                       hr(),
-                       tabAppStatusItemsUI(),
-                       bsAlert("noPIA"))
+                column(12, 
+                       # uiOutput('desktopUiStatusItemsRender')
+                       appStatusDateSelect(),
+                       bsAlert('dataStatus'),
+                       tabsetPanel(type='tabs',
+                                   appStatusPrediction(),
+                                   appStatusQuality()
+                       )
+                )
         )
 }
+
+# constants for configurable Tabs
+# defaultStatTabsName <- c('Plot')
+# 
+# defaultStatTabsUI <- c(
+#         "
+#         tabPanel('Plot',
+#                  plotOutput(outputId = ns('bank2Plot'), height = '300px')
+#         )
+#         "
+# )
+# 
+# defaultStatTabsLogic <- c(
+#         "
+#         output$bank2Plot <- renderPlot({
+#                 data <- currData()
+#                 plot(x=data$date, y=data$value, type='l', 
+#                         xlab='Datum', ylab='Euro')
+#         
+#         })
+#         "
+# )

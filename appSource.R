@@ -1,18 +1,16 @@
-tabAppSourceUI <- function(){
+# layout for section "Source"
+# last update: 2016-10-06
+
+source('appSourceSurvey.R')
+source('appSourceInput.R')
+
+appSource <- function(){
         fluidRow(
-                column(1),
-                column(10,
-                       tabsetPanel(
-                               type="tabs",
-                               tabPanel("Web Umfrage",
-                                        fluidRow(
-                                                column(2,
-                                                       img(src='survey-icon.jpg',width='100px')),
-                                                column(9,
-                                                       helpText('hier kannst du die Umfragen konfigurieren')
-                                                )
-                                        )
-                                )
+                column(12,
+                       # uiOutput('desktopUiSourceItemsRender')
+                       tabsetPanel(type='tabs',
+                                   appSourceSurvey(),
+                                   appSourceInput()
                        )
                 )
         )

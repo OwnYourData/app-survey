@@ -1,28 +1,23 @@
-tabAppStoreUI <- function(){
+# layout for section "Storage"
+# last update: 2016-10-06
+
+appStore <- function(){
         fluidRow(
-                column(1),
-                column(10,
-                       bsAlert('topAlert'),
-                       bsAlert('recordAlert'),
+                column(12,
                        h3('Datenblatt'),
-                       helpText('Änderungen an den Daten werden sofort übernommen'),
-                       rHandsontableOutput("dataSheet"),
+                       selectInput('repoSelect',
+                                   label = 'Auswahl:',
+                                   choices = names(appRepos)),
+                       rHandsontableOutput('dataSheet'),
                        br(),
-                       downloadButton('exportCSV', 'CSV Export'),
-                       checkboxInput('showPiaSetup', 'PIA-Zugriff konfigurieren', FALSE),
+                       htmlOutput('dataSheetDirty', inline = TRUE),
                        conditionalPanel(
-                                condition = 'input.showPiaSetup',
-                                wellPanel(
-                                        h3('Authentifizierung'),
-                                        textInput('pia_url', 'Adresse:', getPiaConnection(appName)[['url']]),
-                                        textInput('app_key', 'ID (Allergien):', getPiaConnection(appName)[['app_key']]),
-                                        textInput('app_secret', 'Secret (Allergien):', getPiaConnection(appName)[['app_secret']]),
-                                        checkboxInput('localSave', label = 'Zugriffsinformationen lokal speichern', value = FALSE),
-                                        hr(),
-                                        htmlOutput('current_token'),
-                                        htmlOutput('current_records')
-                                )
-                       )
+                               condition = "output.dataSheetDirty != ''",
+                               tagList(actionButton('saveSheet', 
+                                                    'Änderungen im Datentresor speichern', 
+                                                    icon=icon('save')),
+                                       br(),br())),
+                       downloadButton('exportCSV', 'CSV Export')
                 )
         )
 }

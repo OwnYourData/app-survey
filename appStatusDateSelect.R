@@ -1,14 +1,19 @@
-tabAppStatusDateSelectUI <- function(){
+# UI for selecting a date-range
+# last update: 2016-10-06
+
+appStatusDateSelect <- function(){
         fluidRow(
-                column(6,
+                column(4,
                        dateRangeInput('dateRange',
                                       language = 'de',
                                       separator = ' bis ',
                                       format = 'dd.mm.yyyy',
                                       label = 'Zeitfenster',
-                                      start = Sys.Date() - 30, end = Sys.Date())
+                                      start = as.Date(Sys.Date() - months(6)), 
+                                      end = Sys.Date()
+                       )
                 ),
-                column(6,
+                column(4,
                        selectInput('dateSelect',
                                    label = 'Auswahl',
                                    choices = c('letzte Woche'='1',
@@ -17,6 +22,17 @@ tabAppStatusDateSelectUI <- function(){
                                                'letzten 6 Monate'='4',
                                                'aktuelles Jahr'='5',
                                                'letztes Jahr'='6',
-                                               'individuell'='7')))
+                                               'alle Daten'='10',
+                                               'individuell'='7'),
+                                   selected = 4
+                       )
+                ),
+                column(4,
+                       selectInput('tagSelect',
+                                   label = 'Bereich',
+                                   choices = c('alle'),
+                                   selected = 'alle'
+                       )
+                )
         )
 }
