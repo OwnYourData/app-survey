@@ -90,6 +90,56 @@ currData <- reactive({
         }
 })
 
+currDataDateSelect <- reactive({
+        closeAlert(session, 'myDataStatus')
+        data <- currData()
+        if(nrow(data) > 0){
+                mymin <- as.Date(input$dateRange[1], '%d.%m.%Y')
+                mymax <- as.Date(input$dateRange[2], '%d.%m.%Y')
+                if(mymax > mymin){
+                        daterange <- seq(mymin, mymax, 'days')
+                        data <- data[as.Date(data$date) %in% daterange, ]
+                        if(nrow(data) > 0){
+                                tagsel <- input$tagSelect
+                                if(tagsel == 'alle'){
+                                        data
+                                } else {
+                                        data <- data[unlist(lapply(lapply(
+                                                strsplit(data$tags, ';'), trimws), 
+                                                function(x) tagsel %in% x)), ]
+                                        if(nrow(data) > 0){
+                                                data
+                                        } else {
+                                                createAlert(session, 'dataStatus', alertId = 'myDataStatus',
+                                                            style = 'warning', append = FALSE,
+                                                            title = 'Keine Daten im gewählten Zeitfenster und Bereich',
+                                                            content = 'Für das ausgewählte Zeitfenster und den gewählten Bereich sind keine Daten vorhanden.')
+                                                data.frame()
+                                        }
+                                }
+                        } else {
+                                createAlert(session, 'dataStatus', alertId = 'myDataStatus',
+                                            style = 'warning', append = FALSE,
+                                            title = 'Keine Daten im gewählten Zeitfenster',
+                                            content = 'Für das ausgewählte Zeitfenster sind keine Daten vorhanden.')
+                                data.frame()
+                        }
+                } else {
+                        createAlert(session, 'dataStatus', alertId = 'myDataStatus',
+                                    style = 'warning', append = FALSE,
+                                    title = 'Ungültiges Zeitfenster',
+                                    content = 'Im ausgewählten Zeitfenster liegt das End-Datum vor dem Beginn-Datum. Korriege die Eingabe!')
+                        data.frame()
+                }
+        } else {
+                createAlert(session, 'dataStatus', alertId = 'myDataStatus',
+                            style = 'warning', append = FALSE,
+                            title = 'Keine Daten im Datentresor vorhanden',
+                            content = 'Derzeit sind noch keine Daten im Datentresor gespeichert. Wechsle zu "Datenquellen" und erfasse Daten!')
+                data.frame()
+        }
+})
+
 currDataDateSelectTimestamp <- reactive({
         closeAlert(session, 'myDataStatus')
         data <- currData()

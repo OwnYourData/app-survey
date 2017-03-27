@@ -3,6 +3,15 @@
 
 appStatusPrediction <- function(){
         tabPanel('Umfragen', br(),
-                 DT::dataTableOutput('predictionList')
+                 bsModal('forecastTableDialog',
+                         'Vorhersagen',
+                         trigger = NA,
+                         size='large',
+                         DT::dataTableOutput('forecastTable')
+                 ),
+                 DT::dataTableOutput('predictionList'),
+                 actionButton('showForecasts',
+                              'Vorhersagen anzeigen',
+                              icon = icon('search'))
         )
 }

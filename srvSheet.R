@@ -140,7 +140,6 @@ hot_dat2DF <- function(data, repoStruct, orderDecreasing){
         initVal <- data.frame(lapply(initVal, type.convert),
                               stringsAsFactors=FALSE)
         if(nrow(data) > 0){
-                save(data, fields, file='tmpIvestigate.RData')
                 data <- data[, fields, drop=FALSE]
                 data <- data[!is.na(data[fieldKey]), , drop=FALSE]
                 if(nrow(data) > 0){

@@ -6,9 +6,11 @@ appStatusQuality <- function(){
                  fluidRow(
                          column(1),
                          column(10,
+                                span('an'),
                                 textOutput('surveyCount', inline = TRUE), 
                                 span('Umfragen teilgenommen'),
                                 br(),
+                                span('dabei'),
                                 textOutput('responseCount', inline = TRUE),
                                 span('Vorhersagen getroffen'),
                                 h2('Brier-Score'), 
