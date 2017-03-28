@@ -234,6 +234,14 @@ observeEvent(input$saveForecastInput, {
                 createAlert(session, 'saveForecastInfo', alertId = 'saveTask',
                             style = 'success', append = FALSE,
                             content = 'Daten gespeichert')
+                
+                updateDateInput(session, 'dateInput', 
+                                value = as.character(Sys.Date()))
+                updateSelectInput(session, 'surveySelect', selected = '')
+                updateSelectInput(session, 'forecastSelect',
+                                  choices = '', selected = '')
+                updateSliderInput(session, 'confidenceValue', value = 60)
+                updateTextAreaInput(session, 'noteInput', value = '')
         }
 })
 
