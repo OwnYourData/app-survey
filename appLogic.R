@@ -33,24 +33,27 @@ appStart <- function(){
 }
 
 output$predictionList <- DT::renderDataTable(datatable({
-        data <- currDataDateSelect()
+        data <- data.frame()
         app <- currApp()
-        url <- itemsUrl(app[['url']],
-                        paste0(app[['app_key']], '.response'))
-        prediction <- readItems(app, url)
-        if(nrow(data) > 0){
-                data$order <- 1:nrow(data)
-                cnts <- data.frame(table(unlist(prediction$survey)))
-                data <- merge(data, cnts, by.x='name', by.y='Var1',
-                              all.x=TRUE, all.y=FALSE)
-                last <- aggregate(prediction[order(prediction$date), 'option'], 
-                                  by=list(prediction[order(prediction$date), 'survey']), 
-                                  FUN=tail, n=1)
-                data <- merge(data, last, by.x='name', by.y='Group.1',
-                              all.x=TRUE, all.y=FALSE)
-                data <- data[order(data$order), ]
-                data <- data[, c('date', 'name', 'Freq','x', 'result')]
-                colnames(data) <- c('Datum', 'Name', '# Prognosen', 'letzte Vorhersage', 'Ergebnis')
+        if(length(app) > 0){
+                data <- currDataDateSelect()
+                url <- itemsUrl(app[['url']],
+                                paste0(app[['app_key']], '.response'))
+                prediction <- readItems(app, url)
+                if(nrow(data) > 0){
+                        data$order <- 1:nrow(data)
+                        cnts <- data.frame(table(unlist(prediction$survey)))
+                        data <- merge(data, cnts, by.x='name', by.y='Var1',
+                                      all.x=TRUE, all.y=FALSE)
+                        last <- aggregate(prediction[order(prediction$date), 'option'], 
+                                          by=list(prediction[order(prediction$date), 'survey']), 
+                                          FUN=tail, n=1)
+                        data <- merge(data, last, by.x='name', by.y='Group.1',
+                                      all.x=TRUE, all.y=FALSE)
+                        data <- data[order(data$order), ]
+                        data <- data[, c('date', 'name', 'Freq','x', 'result')]
+                        colnames(data) <- c('Datum', 'Name', '# Prognosen', 'letzte Vorhersage', 'Ergebnis')
+                }
         }
         data
         

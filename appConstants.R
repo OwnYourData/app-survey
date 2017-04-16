@@ -6,7 +6,7 @@ appName <- 'survey'
 appTitle <- 'Vorhersagen'
 app_id <- 'eu.ownyourdata.survey'
 helpUrl <- 'https://www.ownyourdata.eu/apps/vorhersagen'
-mobileUrl <- 'https://vorhersagen-mobil.datentresor.org'
+mobileUrl <- 'https://vorhersagen-mobil.oydapp.eu'
 
 # definition of data structure
 currRepoSelect <- ''
