@@ -58,7 +58,6 @@ Die folgenden Listen werden von der Vorhersagen-App verwendet:
     - `tags`: Schlagworte / Kategorien dieser Umfrage durch Strichpunkt getrennt    
     - `options`: Liste der Antwortoptionen durch Strichpunkt getrennt    
     - `result`: tatsächliches Ergebnis    
-    - `value`: Skalierung des Befindens von 1-sehr gut bis 6-sehr schlecht    
 * Vorhersage    
     - `date`: Datum im Format YYYY-MM-DD    
     - `survey`: Name der Umfrage zu der eine Vorhersage gemacht wird    
